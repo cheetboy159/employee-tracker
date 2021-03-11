@@ -21,13 +21,14 @@ function askFirstQuestions(){
         type: "list",
         message: "What would you like to do?",
         choices: [
-            "View all departments",
-            "View all roles",
             "View all employees",
-            "Add a department",
-            "Add a role",
+            "View all employees by department",
+            "View all employees by manager",
             "Add an employee",
+            "Remove employee",
             "Update employee role",
+            "Update employee manager",
+            "View all roles",
             "Exit"
         ]
     }).then((answer)=>{
