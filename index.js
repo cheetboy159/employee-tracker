@@ -15,46 +15,113 @@ connection.connect((err) => {
     askFirstQuestions();
 });
 
-function askFirstQuestions(){
+function askFirstQuestions() {
     inquirer.prompt({
         name: "action",
         type: "list",
         message: "What would you like to do?",
         choices: [
-            "View all employees",
-            "View all employees by department",
-            "View all employees by manager",
-            "Add an employee",
-            "Remove employee",
-            "Update employee role",
+            "Add departments",
+            "Add roles",
+            "Add employees",
+            "View departments",
+            "View roles",
+            "View employees",
+            "Update employee roles",
             "Update employee manager",
-            "View all roles",
+            "View employees by manager",
+            "Delete departments",
+            "Delete roles",
+            "Delete employees",
+            "View the total utilized budget of a department",
             "Exit"
         ]
-    }).then((answer)=>{
-        console.log(answer);
+    }).then((answer) => {
+        // console.log(answer);
+        if (answer.action === "Add departments") {
+            addDepartments();
+        } else if (answer.action === "Add roles") {
+            addRoles();
+        } else if (answer.action === "Add employees") {
+            addEmployees();
+        } else if (answer.action === "View departments") {
+            viewDepartments();
+        } else if (answer.action === "View roles") {
+            viewRoles();
+        } else if (answer.action === "View employees") {
+            viewEmployees();
+        } else if (answer.action === "Update employee roles") {
+            updateEmployeeRoles();
+        } else if (answer.action === "Update employee manager") {
+            updateEmployeeManager();
+        } else if (answer.action === "View employees by manager") {
+            viewEmployeesByManager();
+        } else if (answer.action === "Delete departments") {
+            deleteDepartments();
+        } else if (answer.action === "Delete roles") {
+            deleteRoles();
+        } else if (answer.action === "Delete employees") {
+            deleteEmployees();
+        } else if (answer.action === "View the total utilized budget of a department") {
+            viewTheTotalUtilizedBudgetOfADepartment();
+        }else if (answer.action === 'Exit') {
+            connection.end();
+            console.log("Have a good day.")
+        }
     })
 }
 
-// * ** department **:
+function addDepartments(){
 
-//   * ** id ** - INT PRIMARY KEY
-//     * ** name ** - VARCHAR(30) to hold department name
+}
 
-//         * ** role **:
+function addRoles(){
 
-//   * ** id ** - INT PRIMARY KEY
-//     * ** title ** -  VARCHAR(30) to hold role title
-//         * ** salary ** -  DECIMAL to hold role salary
-//             * ** department_id ** -  INT to hold reference to department role belongs to
+}
 
-//                 * ** employee **:
+function addEmployees(){
 
-//   * ** id ** - INT PRIMARY KEY
-//     * ** first_name ** - VARCHAR(30) to hold employee first name
-//         * ** last_name ** - VARCHAR(30) to hold employee last name
-//             * ** role_id ** - INT to hold reference to role employee has
-//                 * ** manager_id ** - INT to hold reference to another employee that manages the employee being Created.This field may be null if the employee has no manager
+}
+
+function viewDepartments(){
+
+}
+
+function viewRoles(){
+
+}
+
+function viewEmployees(){
+
+}
+
+function updateEmployeeRoles(){
+
+}
+
+function updateEmployeeManager(){
+
+}
+
+function viewEmployeesByManager(){
+
+}
+
+function deleteDepartments(){
+
+}
+
+function deleteRoles(){
+
+}
+
+function deleteEmployees(){
+
+}
+
+function viewTheTotalUtilizedBudgetOfADepartment(){
+
+}
 
 // Build a command - line application that at a minimum allows the user to:
 
