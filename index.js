@@ -72,14 +72,26 @@ function askFirstQuestions() {
 }
 //   * Add departments, roles, employees
 function addDepartments() {
-
+    inquirer.prompt({
+            name: "department",
+            type: "input",
+            message: "Name the department"
+        }).then((answer) => {
+            var query = "INSERT INTO department (name) VALUES (?)";
+            connection.query(query, answer.department, function (err, res) {
+                console.log(`You have added this department: ${(answer.department).toUpperCase()}.`)
+            })
+            viewDepartments();
+        })
 }
 
 function addRoles() {
 
+
 }
 
 function addEmployees() {
+
 
 }
 //     * View departments, roles, employees
@@ -111,28 +123,35 @@ function viewEmployees() {
 //         * Update employee roles
 function updateEmployeeRoles() {
 
+    askFirstQuestions();
 }
 //     * Update employee managers
 function updateEmployeeManager() {
 
+    askFirstQuestions();
 }
 //         * View employees by manager
 function viewEmployeesByManager() {
 
+    askFirstQuestions();
 }
 //             * Delete departments, roles, and employees
 function deleteDepartments() {
 
+    askFirstQuestions();
 }
 
 function deleteRoles() {
 
+    askFirstQuestions();
 }
 
 function deleteEmployees() {
 
+    askFirstQuestions();
 }
 // * View the total utilized budget of a department-- ie the combined salaries of all employees in that department
 function viewTheTotalUtilizedBudgetOfADepartment() {
 
+    askFirstQuestions();
 }
