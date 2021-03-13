@@ -64,79 +64,75 @@ function askFirstQuestions() {
             deleteEmployees();
         } else if (answer.action === "View the total utilized budget of a department") {
             viewTheTotalUtilizedBudgetOfADepartment();
-        }else if (answer.action === 'Exit') {
+        } else if (answer.action === 'Exit') {
             connection.end();
             console.log("Have a good day.")
         }
     })
 }
-
-function addDepartments(){
-
-}
-
-function addRoles(){
-
-}
-
-function addEmployees(){
-
-}
-
-function viewDepartments(){
-
-}
-
-function viewRoles(){
-
-}
-
-function viewEmployees(){
-
-}
-
-function updateEmployeeRoles(){
-
-}
-
-function updateEmployeeManager(){
-
-}
-
-function viewEmployeesByManager(){
-
-}
-
-function deleteDepartments(){
-
-}
-
-function deleteRoles(){
-
-}
-
-function deleteEmployees(){
-
-}
-
-function viewTheTotalUtilizedBudgetOfADepartment(){
-
-}
-
-// Build a command - line application that at a minimum allows the user to:
-
 //   * Add departments, roles, employees
+function addDepartments() {
 
+}
+
+function addRoles() {
+
+}
+
+function addEmployees() {
+
+}
 //     * View departments, roles, employees
+function viewDepartments() {
+    let departmints = "SELECT * FROM department";
+    connection.query(departmints, (err, res) => {
+        console.log(`Departmints: `);
+        console.table(res);
+        askFirstQuestions();
+    })
+}
+function viewRoles() {
+    let departmints = "SELECT * FROM role";
+    connection.query(departmints, (err, res) => {
+        console.log(`Roles: `);
+        console.table(res);
+        askFirstQuestions();
+    })
+}
 
+function viewEmployees() {
+    let departmints = "SELECT * FROM employee";
+    connection.query(departmints, (err, res) => {
+        console.log(`Employees: `);
+        console.table(res);
+        askFirstQuestions();
+    })
+}
 //         * Update employee roles
+function updateEmployeeRoles() {
 
-// Bonus points if you're able to:
-
+}
 //     * Update employee managers
+function updateEmployeeManager() {
 
+}
 //         * View employees by manager
+function viewEmployeesByManager() {
 
+}
 //             * Delete departments, roles, and employees
+function deleteDepartments() {
 
-//                 * View the total utilized budget of a department-- ie the combined salaries of all employees in that department
+}
+
+function deleteRoles() {
+
+}
+
+function deleteEmployees() {
+
+}
+// * View the total utilized budget of a department-- ie the combined salaries of all employees in that department
+function viewTheTotalUtilizedBudgetOfADepartment() {
+
+}
