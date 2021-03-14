@@ -210,8 +210,26 @@ function deleteRoles() {
 }
 
 function deleteEmployees() {
-    console.log("not complete");
-    askFirstQuestions();
+    let query = `SELECT * FROM employee`
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        inquirer.prompt([{
+            type: "list",
+            name: "removeEmployee",
+            message: "Please select employee to remove",
+            choices: res.map(employee => {
+                return { name: `${employee.first_name} ${employee.last_name}`, value: employee.id }
+            })
+        }])
+            .then(answer => {
+                let query = `DELETE FROM employee WHERE ?`
+                connection.query(query, [{ id: answer.removeEmployee }], (err) => {
+                    if (err) throw err;
+                    console.log("Employee removed");
+                    viewEmployees();
+                })
+            })
+    })
 }
 // * View the total utilized budget of a department-- ie the combined salaries of all employees in that department
 function viewTheTotalUtilizedBudgetOfADepartment() {
