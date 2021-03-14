@@ -184,36 +184,37 @@ function viewEmployees() {
 }
 //         * Update employee roles
 function updateEmployeeRoles() {
+    console.log("not complete");
 
     askFirstQuestions();
 }
 //     * Update employee managers
 function updateEmployeeManager() {
-
+    console.log("not complete");
     askFirstQuestions();
 }
 //         * View employees by manager
 function viewEmployeesByManager() {
-
+    console.log("not complete");
     askFirstQuestions();
 }
 //             * Delete departments, roles, and employees
 function deleteDepartments() {
-
+    console.log("not complete");
     askFirstQuestions();
 }
 
 function deleteRoles() {
-
+    console.log("not complete");
     askFirstQuestions();
 }
 
 function deleteEmployees() {
-
+    console.log("not complete");
     askFirstQuestions();
 }
 // * View the total utilized budget of a department-- ie the combined salaries of all employees in that department
 function viewTheTotalUtilizedBudgetOfADepartment() {
-
+    console.log("not complete");
     askFirstQuestions();
 }
