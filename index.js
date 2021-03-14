@@ -36,7 +36,7 @@ function askFirstQuestions() {
             "View the total utilized budget of a department",
             "Exit"
         ]
-    }).then((answer) => {
+    }).then(answer => {
         // console.log(answer);
         if (answer.action === "Add departments") {
             addDepartments();
@@ -72,21 +72,39 @@ function askFirstQuestions() {
 }
 //   * Add departments, roles, employees
 function addDepartments() {
-    inquirer.prompt({
+    let query = `SELECT * FROM department`
+    connection.query(query, (err, res) => {
+        inquirer.prompt({
             name: "department",
             type: "input",
-            message: "Name the department"
-        }).then((answer) => {
+            message: "Enter name for new department"
+        }).then(answer => {
             var query = "INSERT INTO department (name) VALUES (?)";
             connection.query(query, answer.department, function (err, res) {
-                console.log(`You have added this department: ${(answer.department).toUpperCase()}.`)
+                if (err) throw err
+                console.log(`You have added this department: ${answer.department}.`)
             })
             viewDepartments();
         })
+    })
 }
 
 function addRoles() {
-
+    inquirer.prompt({
+        name: "role",
+        type: "input",
+        message: "Name of role?"
+    }, {
+        name: "sallary",
+        type: "input",
+        message: "What is the salary for the role?"
+    }).then(answer => {
+        var query = "INSERT INTO role (name) VALUES (?)";
+        connection.query(query, [answer.role, answer.sallary], (err, res) => {
+            console.log(`You have added role: ${answer.role} with sallery of ${answer.sallary}`)
+        })
+        viewRoles();
+    })
 
 }
 
@@ -98,7 +116,8 @@ function addEmployees() {
 function viewDepartments() {
     let departmints = "SELECT * FROM department";
     connection.query(departmints, (err, res) => {
-        console.log(`Departmints: `);
+        if (err) throw err;
+        console.log(`Departmints:`);
         console.table(res);
         askFirstQuestions();
     })
@@ -106,15 +125,16 @@ function viewDepartments() {
 function viewRoles() {
     let departmints = "SELECT * FROM role";
     connection.query(departmints, (err, res) => {
+        if (err) throw err;
         console.log(`Roles: `);
         console.table(res);
         askFirstQuestions();
     })
 }
-
 function viewEmployees() {
     let departmints = "SELECT * FROM employee";
     connection.query(departmints, (err, res) => {
+        if (err) throw err;
         console.log(`Employees: `);
         console.table(res);
         askFirstQuestions();
