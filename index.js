@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
+const cTable = require("console.table");
 
 // connect to the database
 const connection = mysql.createConnection({
@@ -66,7 +67,7 @@ function askFirstQuestions() {
             viewTheTotalUtilizedBudgetOfADepartment();
         } else if (answer.action === 'Exit') {
             connection.end();
-            console.log("Have a good day.")
+            console.log("Have a good day.");
         }
     })
 }
@@ -80,7 +81,7 @@ function addDepartments() {
             message: "Enter name for new department"
         }).then(answer => {
             var query = "INSERT INTO department (name) VALUES (?)";
-            connection.query(query, answer.department, function (err, res) {
+            connection.query(query, answer.department, (err, res) => {
                 if (err) throw err
                 console.log(`You have added this department: ${answer.department}.`)
             })
@@ -88,26 +89,34 @@ function addDepartments() {
         })
     })
 }
-
 function addRoles() {
-    inquirer.prompt({
-        name: "role",
-        type: "input",
-        message: "Name of role?"
-    }, {
-        name: "sallary",
-        type: "input",
-        message: "What is the salary for the role?"
-    }).then(answer => {
-        var query = "INSERT INTO role (name) VALUES (?)";
-        connection.query(query, [answer.role, answer.sallary], (err, res) => {
-            console.log(`You have added role: ${answer.role} with sallery of ${answer.sallary}`)
+    let query = `SELECT * FROM role`;
+    connection.query(query, (err, res) => {
+        if (err) throw err
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "title",
+                message: "Please enter title of new role"
+            }, {
+                type: "input",
+                name: "salary",
+                message: "Please enter salary for new role"
+            }, {
+                type: "input",
+                name: "departmentID",
+                message: "Please enter department id for new role"
+            }
+        ]).then(answers => {
+            let query = `INSERT INTO role VALUES (?,?,?)`;
+            connection.query(query, [answers.title, answers.salary, answer.departmentID], function (err) {
+                if (err) throw err;
+                console.log(`${answers.role} added as new role`);
+                viewRoles();
+            })
         })
-        viewRoles();
     })
-
 }
-
 function addEmployees() {
 
 
