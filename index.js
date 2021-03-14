@@ -15,7 +15,6 @@ connection.connect((err) => {
     if (err) throw err;
     askFirstQuestions();
 });
-
 function askFirstQuestions() {
     inquirer.prompt({
         name: "action",
@@ -28,13 +27,13 @@ function askFirstQuestions() {
             "View departments",
             "View roles",
             "View employees",
-            "Update employee roles",
-            "Update employee manager",
-            "View employees by manager",
-            "Delete departments",
-            "Delete roles",
+            // "Update employee roles",
+            // "Update employee manager",
+            // "View employees by manager",
+            // "Delete departments",
+            // "Delete roles",
             "Delete employees",
-            "View the total utilized budget of a department",
+            // "View the total utilized budget of a department",
             "Exit"
         ]
     }).then(answer => {
@@ -51,10 +50,10 @@ function askFirstQuestions() {
             viewRoles();
         } else if (answer.action === "View employees") {
             viewEmployees();
-        } else if (answer.action === "Update employee roles") {
-            updateEmployeeRoles();
-        } else if (answer.action === "Update employee manager") {
-            updateEmployeeManager();
+        // } else if (answer.action === "Update employee roles") {
+        //     updateEmployeeRoles();
+        // } else if (answer.action === "Update employee manager") {
+        //     updateEmployeeManager();
         } else if (answer.action === "View employees by manager") {
             viewEmployeesByManager();
         } else if (answer.action === "Delete departments") {
@@ -102,14 +101,16 @@ function addRoles() {
                 type: "input",
                 name: "salary",
                 message: "Please enter salary for new role"
-            }, {
-                type: "input",
-                name: "departmentID",
-                message: "Please enter department id for new role"
             }
+            // , {
+            //     type: "input",
+            //     name: "departmentID",
+            //     message: "Please enter department id for new role"
+            // }
         ]).then(answers => {
-            let query = `INSERT INTO role VALUES (?,?,?)`;
-            connection.query(query, [answers.title, answers.salary, answer.departmentID], function (err) {
+            let query = `INSERT INTO role (title, salary) VALUES (?,?)`;
+            // answer.departmentID
+            connection.query(query, [answers.title, answers.salary], function (err) {
                 if (err) throw err;
                 console.log(`${answers.role} added as new role`);
                 viewRoles();
@@ -182,17 +183,17 @@ function viewEmployees() {
         askFirstQuestions();
     })
 }
-//         * Update employee roles
-function updateEmployeeRoles() {
-    console.log("not complete");
+// //         * Update employee roles
+// function updateEmployeeRoles() {
+//     console.log("not complete");
 
-    askFirstQuestions();
-}
-//     * Update employee managers
-function updateEmployeeManager() {
-    console.log("not complete");
-    askFirstQuestions();
-}
+//     askFirstQuestions();
+// }
+// //     * Update employee managers
+// function updateEmployeeManager() {
+//     console.log("not complete");
+//     askFirstQuestions();
+// }
 //         * View employees by manager
 function viewEmployeesByManager() {
     console.log("not complete");
@@ -203,12 +204,10 @@ function deleteDepartments() {
     console.log("not complete");
     askFirstQuestions();
 }
-
 function deleteRoles() {
     console.log("not complete");
     askFirstQuestions();
 }
-
 function deleteEmployees() {
     let query = `SELECT * FROM employee`
     connection.query(query, (err, res) => {
